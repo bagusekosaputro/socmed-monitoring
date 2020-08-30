@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_DB=socmed
+      - POSTGRES_USER=socmed
+      - POSTGRES_PASSWORD='@dm!n5ocMeD'
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:9000
+    volumes:
+      - .:/src
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
